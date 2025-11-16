@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mamzo Lifestyle's | Notifications</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #7F00FF, #000000);
+  color: white;
+  margin: 0;
+  padding-bottom: 100px;
+}
+.notification-card {
+  background: rgba(0, 0, 0, 0.6);
+  border-left: 4px solid #7F00FF;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+.notification-card:hover {
+  background: rgba(127, 0, 255, 0.3);
+}
+.unread {
+  border-left-color: #ffcc00;
+}
+.filter-bar input {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid #7F00FF;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  color: white;
+  outline: none;
+}
+.filter-bar input::placeholder {
+  color: #bbb;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="flex justify-between items-center p-4 border-b border-purple-600 bg-black bg-opacity-60">
+  <h1 class="text-2xl font-bold"><i class="fas fa-bell text-yellow-400"></i> Notifications</h1>
+  <button onclick="markAllRead()" class="text-sm bg-purple-600 px-4 py-1 rounded hover:bg-purple-700">
+    Mark All Read
+  </button>
+</header>
+
+<!-- Filter Bar -->
+<div class="filter-bar p-4">
+  <input type="text" id="searchInput" placeholder="Search notifications..." onkeyup="filterNotifications()">
+</div>
+
+<!-- Notifications List -->
+<div id="notifications" class="p-4 space-y-3">
+
+  <!-- Example 20 Notifications -->
+  <div class="notification-card unread">
+    <i class="fas fa-burger text-yellow-400 mr-2"></i>
+    Your breakfast order has been accepted 🍳 — <small>2 mins ago</small>
+  </div>
+  <div class="notification-card unread">
+    <i class="fas fa-clock text-purple-400 mr-2"></i>
+    Order #1034 is on its way 🚗 — <small>5 mins ago</small>
+  </div>
+  <div class="notification-card">
+    <i class="fas fa-store text-green-400 mr-2"></i>
+    New restaurant “Mama’s Kitchen” joined Mamzo Lifestyle's! 🍲 — <small>10 mins ago</small>
+  </div>
+  <div class="notification-card">
+    <i class="fas fa-gift text-pink-400 mr-2"></i>
+    Get 10% off your first lunch order 🎁 — <small>15 mins ago</small>
+  </div>
+  <div class="notification-card unread">
+    <i class="fas fa-utensils text-red-400 mr-2"></i>
+    Dinner promo: Free drink with every order 🍷 — <small>20 mins ago</small>
+  </div>
+  <div class="notification-card">
+    <i class="fas fa-truck text-blue-400 mr-2"></i>
+    Your delivery has arrived! 🍔 — <small>25 mins ago</small>
+  </div>
+  <div class="notification-card unread">
+    <i class="fas fa-credit-card text-orange-400 mr-2"></i>
+    Payment for order #1045 confirmed 💳 — <small>30 mins ago</small>
+  </div>
+  <div class="notification-card">
+    <i class="fas fa-bell text-yellow-400 mr-2"></i>
+    You have 3 unread messages 📩 — <small>35 mins ago</small>
+  </div>
+  <div class="notification-card">
+    <i class="fas fa-user text-teal-400 mr-2"></i>
+    Welcome back, Quinn! — <small>40 mins ago</small>
+  </div>
+  <div class="notification-card unread">
+    <i class="fas fa-leaf text-green-300 mr-2"></i>
+    New vegan breakfast menu available 🥑 — <small>45 mins ago</small>
+  </div>
+  <div class="notification-card">
+    <i class="fas fa-star text-yellow-300 mr-2"></i>
+    Rate your last order to earn loyalty points 🌟 — <small>1 hr ago</small>
+  </div>
+  <div class="notification-card unread">
+    <i class="fas fa-truck-fast text-red-400 mr-2"></i>
+    Delivery delay notice 🚧 — <small>1 hr 20 mins ago</small>
+  </div>
+  <div class="notification-card">
+    <i class="fas fa-fire text-orange-500 mr-2"></i>
+    Hot deals for lunch🔥 — <small>2 hrs ago</small>
+  </div>
+  <div class="notification-card unread">
+    <i class="fas fa-calendar-check text-blue-300 mr-2"></i>
+    Weekly offers are live now 🎉 — <small>3 hrs ago</small>
+  </div>
+  <div class="notification-card">
+    <i class="fas fa-birthday-cake text-pink-400 mr-2"></i>
+    Happy Birthday, Quinn! Here’s a R50 coupon 🎂 — <small>4 hrs ago</small>
+  </div>
+  <div class="notification-card unread">
+    <i class="fas fa-coffee text-brown-400 mr-2"></i>
+    Morning coffee combo now available ☕ — <small>5 hrs ago</small>
+  </div>
+  <div class="notification-card">
+    <i class="fas fa-crown text-yellow-500 mr-2"></i>
+    You’re now a Gold Member 👑 — <small>6 hrs ago</small>
+  </div>
+  <div class="notification-card unread">
+    <i class="fas fa-wallet text-green-400 mr-2"></i>
+    Wallet balance updated 💰 — <small>7 hrs ago</small>
+  </div>
+  <div class="notification-card">
+    <i class="fas fa-receipt text-gray-300 mr-2"></i>
+    Receipt for your last purchase is ready 🧾 — <small>8 hrs ago</small>
+  </div>
+  <div class="notification-card unread">
+    <i class="fas fa-percent text-purple-300 mr-2"></i>
+    Flash sale — Get 25% off all dinners 🍛 — <small>10 hrs ago</small>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="mt-10 text-center py-4 bg-black bg-opacity-60 text-sm border-t border-purple-600">
+  <p class="mb-1">Powered by <span class="font-semibold text-purple-400">BlackLogic Technologies</span> ⚡</p>
+  <p>&copy; <span id="year"></span> Mamzo Lifestyle's. All rights reserved.</p>
+</footer>
+
+<script>
+// Auto year update
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Filter Notifications
+function filterNotifications() {
+  let input = document.getElementById('searchInput').value.toLowerCase();
+  let cards = document.querySelectorAll('.notification-card');
+  cards.forEach(card => {
+    if (card.innerText.toLowerCase().includes(input)) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// Mark all as read
+function markAllRead() {
+  document.querySelectorAll('.notification-card').forEach(card => {
+    card.classList.remove('unread');
+  });
+  alert("All notifications marked as read ✅");
+}
+</script>
+
+</body>
+</html>

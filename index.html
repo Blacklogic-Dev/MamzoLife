@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mamzo Lifestyle's | Fast Food Delivery</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #7F00FF, #000000);
+  color: white;
+  margin: 0;
+}
+
+.flip-card {
+  perspective: 1000px;
+  width: 95%;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.flip-card-inner {
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  width: 100%;
+  position: relative;
+}
+
+.flip-card.flip .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: relative;
+  width: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  background: rgba(0,0,0,0.7);
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.btn {
+  background: #7F00FF;
+  color: white;
+  font-weight: bold;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.btn:hover {
+  background: #5900cc;
+}
+
+input, select, file {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.slide {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.5s;
+}
+
+.hidden { display: none; }
+
+@media (max-width: 480px) {
+  .flip-card {
+    width: 95%;
+    margin: 10px auto;
+  }
+  .flip-card-front, .flip-card-back {
+    padding: 15px;
+  }
+  h2 { font-size: 1.5rem; }
+  .btn { padding: 0.6rem; }
+  input, select, file {
+    font-size: 14px;
+  }
+}
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- Walkthrough Slides -->
+<div id="slides">
+  <div class="slide" id="slide1">
+    <img src="mamzo.jpg" class="mx-auto mb-6 w-[600px] h-[300px]" alt="Mamzo Logo">
+  
+    <h1 class="text-3xl font-bold mb-4">Welcome to Mamzo Lifestyle's</h1>
+    <p class="max-w-md">Your ultimate fast food delivery app in 2025. Order delicious meals instantly and enjoy lightning-fast delivery.</p>
+    <button class="btn mt-8" onclick="nextSlide()">Next</button>
+  </div>
+  <div class="slide hidden" id="slide2">
+    <img src="mamzo.jpg" class="mx-auto mb-6 w-[200px] h-[200px]" alt="Mamzo Logo">
+    <i class="fas fa-shipping-fast fa-4x mb-6"></i>
+    <h1 class="text-3xl font-bold mb-4">Fast & Reliable</h1>
+    <p class="max-w-md">Track your orders in real-time and get them delivered hot and fresh directly to your door.</p>
+    <button class="btn mt-8" onclick="nextSlide()">Next</button>
+  </div>
+  <div class="slide hidden" id="slide3">
+    <img src="mamzo.jpg" class="mx-auto mb-6 w-[200px] h-[200px]" alt="Mamzo Logo">
+    <i class="fas fa-user-friends fa-4x mb-6"></i>
+    <h1 class="text-3xl font-bold mb-4">For Everyone</h1>
+    <p class="max-w-md">Whether you’re a hungry customer or a business owner, Mamzo Lifestyle's makes food delivery simple and fun.</p>
+    <button class="btn mt-8" onclick="showAccountType()">Get Started</button>
+  </div>
+</div>
+
+<!-- Account Type Selection -->
+<div id="account-type" class="hidden slide">
+  <img src="mamzo.jpg" class="mx-auto mb-6 w-[200px] h-[200px]" alt="Mamzo Logo">
+  <h1 class="text-3xl font-bold mb-6">Choose Your Account</h1>
+  <div class="flex gap-6 justify-center flex-wrap">
+    <button class="btn max-w-[150px]" onclick="showForm('customer')"><i class="fas fa-user"></i> Customer</button>
+    <button class="btn max-w-[150px]" onclick="showForm('business')"><i class="fas fa-store"></i> Business</button>
+  </div>
+</div>
+
+<!-- Flip Card Form -->
+<div id="form-container" class="hidden mt-10 flex justify-center">
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <!-- Front: Create Account -->
+      <div class="flip-card-front">
+        <img src="mamzo.jpg" class="mx-auto mb-6 w-[200px] h-[200px]" alt="Logo">
+        <h2 class="text-2xl font-bold mb-4" id="form-title">Create Account</h2>
+        <form id="createForm" class="flex flex-col gap-3">
+          <div id="customerFields" class="hidden">
+            <input type="text" placeholder="Name" class="p-2 rounded text-black" required>
+            <input type="text" placeholder="Surname" class="p-2 rounded text-black" required>
+            <input type="date" placeholder="Date of Birth" class="p-2 rounded text-black" required>
+            <input type="text" placeholder="Physical Address" class="p-2 rounded text-black" required>
+            <input type="email" placeholder="Email Address" class="p-2 rounded text-black" required>
+            <input type="tel" placeholder="Cellphone Number" class="p-2 rounded text-black" required>
+          </div>
+          <div id="businessFields" class="hidden">
+            <input type="text" placeholder="Name" class="p-2 rounded text-black" required>
+            <input type="email" placeholder="Email Address" class="p-2 rounded text-black" required>
+            <input type="tel" placeholder="Cellphone Number" class="p-2 rounded text-black" required>
+            <input type="text" placeholder="Business Name" class="p-2 rounded text-black" required>
+            <input type="text" placeholder="CIPC Registration Number" class="p-2 rounded text-black" required>
+            <input type="text" placeholder="SARS Number" class="p-2 rounded text-black" required>
+            <input type="file" class="p-2 rounded text-black" required>
+          </div>
+          <button type="submit" class="btn mt-2">Create Account</button>
+        </form>
+        <p class="mt-4 text-center cursor-pointer underline" onclick="flipCard()">Already have an account? Login</p>
+      </div>
+
+      <!-- Back: Login -->
+      <div class="flip-card-back">
+        <img src="mamzo.jpg" class="mx-auto mb-6 w-[200px] h-[200px]" alt="Logo">
+        <h2 class="text-2xl font-bold mb-4">Login</h2>
+        <form id="loginForm" class="flex flex-col gap-3">
+          <input type="email" placeholder="Email Address" class="p-2 rounded text-black" required>
+          <input type="password" placeholder="Password" class="p-2 rounded text-black" required>
+          <button type="submit" class="btn mt-2">Login</button>
+        </form>
+        <p class="mt-4 text-center cursor-pointer underline" onclick="flipCard()">Back to Create Account</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="mt-10 text-center py-4 bg-black bg-opacity-60 text-sm border-t border-purple-600">
+  <p class="mb-1">
+    Powered by <span class="font-semibold text-purple-400">BlackLogic Technologies</span> ⚡
+  </p>
+  <p>&copy; <span id="year"></span> Mamzo Lifestyle's. All rights reserved.</p>
+</footer>
+
+<script>
+// Auto year update
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script>
+let currentSlide = 1;
+const totalSlides = 3;
+
+function nextSlide() {
+  document.getElementById(`slide${currentSlide}`).classList.add('hidden');
+  currentSlide++;
+  if(currentSlide <= totalSlides){
+    document.getElementById(`slide${currentSlide}`).classList.remove('hidden');
+  }
+}
+
+function showAccountType(){
+  document.getElementById('slides').classList.add('hidden');
+  document.getElementById('account-type').classList.remove('hidden');
+}
+
+function showForm(type){
+  document.getElementById('account-type').classList.add('hidden');
+  document.getElementById('form-container').classList.remove('hidden');
+  if(type === 'customer'){
+    document.getElementById('customerFields').classList.remove('hidden');
+    document.getElementById('businessFields').classList.add('hidden');
+    document.getElementById('form-title').innerText = 'Create Customer Account';
+  } else {
+    document.getElementById('businessFields').classList.remove('hidden');
+    document.getElementById('customerFields').classList.add('hidden');
+    document.getElementById('form-title').innerText = 'Create Business Account';
+  }
+}
+
+function flipCard(){
+  document.querySelector('.flip-card').classList.toggle('flip');
+}
+
+// Create Account Submission
+document.getElementById('createForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  let fields = Array.from(this.querySelectorAll('input'));
+  let message = fields.map(f => `${f.placeholder}: ${f.value}`).join('%0A');
+  let password = Math.random().toString(36).slice(-8);
+  message += `%0APassword: ${password}`;
+  window.open(`https://api.whatsapp.com/send?phone=27606614909&text=${message}`, '_blank');
+  alert('Account info sent to WhatsApp!');
+});
+
+// Login Submission
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  window.location.href = 'landing.html';
+});
+</script>
+
+</body>
+</html>
