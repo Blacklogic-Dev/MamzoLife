@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mamzo Lifestyle | All Products</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+      color: #333;
+    }
+
+    header {
+      background: #6a0dad;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .banner {
+      height: 300px;
+      background: url('product.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+    }
+
+    .search-container {
+      text-align: center;
+      margin: 15px;
+    }
+
+    .search-container input {
+      width: 80%;
+      padding: 10px;
+      border: 2px solid #6a0dad;
+      border-radius: 25px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      padding: 15px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .card-content h3 {
+      margin: 5px 0;
+      color: #6a0dad;
+    }
+
+    .card-content p {
+      font-size: 14px;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #444;
+    }
+
+    button {
+      background: #6a0dad;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background: #550a8a;
+    }
+
+    .cart-section {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border-top: 2px solid #6a0dad;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      padding: 10px;
+      text-align: center;
+    }
+
+    .cart-section p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    .whatsapp-btn {
+      background: #25D366;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+
+    footer {
+      background: #6a0dad;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Mamzo Lifestyle All Products</header>
+
+  <div class="banner">Discover Your Meal</div>
+
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Search for food...">
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+
+  <div class="cart-section" id="cart">
+    <p><strong>Cart Total:</strong> R<span id="cartTotal">0.00</span></p>
+    <a href="#" id="shareBtn" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Share Receipt</a>
+  </div>
+
+  <footer>
+    Powered by BlackLogic Technologies © 2025 All Rights Reserved
+  </footer>
+
+  <script>
+    const products = [
+      // Breakfast
+      { name: "Sweet Doughnut", qty: "4", price: 23.99, img: "break1.jpg" },
+      { name: "Morning Rise", qty: "1 tea, 2 slices, 2 eggs, polony", price: 49.99, img: "break2.jpg" },
+      { name: "Morning Shine", qty: "1 tea, burger cheese + eggs", price: 69.99, img: "break3.jpg" },
+      { name: "Cup Coffee", qty: "4 cupcakes 1 tea", price: 44.99, img: "break4.jpg" },
+      { name: "Ekhaya Tea", qty: "4 slices, polony & cheese + tea", price: 65.99, img: "break5.jpg" },
+      { name: "Pasta Gee", qty: "700ml of Pasta", price: 36.99, img: "break6.jpg" },
+
+      // Lunch
+      { name: "Summer Burger", qty: "Burger, Coke & Chips", price: 83.99, img: "lunch1.jpg" },
+      { name: "Nyama Season", qty: "Pap, 2x wors, 2x steak, ribs", price: 99.99, img: "lunch2.jpg" },
+      { name: "African Pride", qty: "Rice, Chicken stew + Coslo", price: 79.99, img: "lunch3.jpg" },
+      { name: "Jikelele", qty: "Chips, 2x Russian", price: 64.99, img: "lunch4.jpg" },
+      { name: "Mac & Cheese", qty: "700ml", price: 45.99, img: "lunch5.jpg" },
+      { name: "Eastern Culture", qty: "700ml", price: 40.99, img: "lunch6.jpg" },
+
+      // Dinner
+      { name: "Ntambama Meal", qty: "Pap, wors & beef stew", price: 89.99, img: "dinner1.jpg" },
+      { name: "English Dinner", qty: "Rice, fried chicken & coslo", price: 99.99, img: "dinner2.jpg" },
+      { name: "Italic Monate", qty: "Cheese & macaroni", price: 79.99, img: "dinner3.jpg" },
+      { name: "Summer Mnandi", qty: "Hotdog, juice, chips", price: 64.99, img: "dinner4.jpg" },
+      { name: "Sweet Zonke", qty: "Swiss rolls & juice", price: 65.99, img: "dinner5.jpg" },
+      { name: "Red Velvet", qty: "1/4 piece of cake", price: 36.99, img: "dinner6.jpg" },
+
+      // Drinks
+      { name: "Coke 500ml", qty: "1 Bottle", price: 14.99, img: "drink1.jpg" },
+      { name: "Fanta Orange", qty: "1 Bottle", price: 14.99, img: "drink2.jpg" },
+      { name: "Sprite 500ml", qty: "1 Bottle", price: 14.99, img: "drink3.jpg" },
+      { name: "Water 500ml", qty: "1 Bottle", price: 9.99, img: "drink4.jpg" },
+      { name: "Iced Tea", qty: "1 Bottle", price: 16.99, img: "drink5.jpg" },
+      { name: "Energy Drink", qty: "1 Can", price: 19.99, img: "drink6.jpg" }
+    ];
+
+    const grid = document.getElementById("productGrid");
+    const search = document.getElementById("search");
+    const cartTotal = document.getElementById("cartTotal");
+    const shareBtn = document.getElementById("shareBtn");
+
+    let total = 0;
+    let receipt = [];
+
+    function displayProducts(items) {
+      grid.innerHTML = "";
+      items.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}">
+          <div class="card-content">
+            <h3>${p.name}</h3>
+            <p>${p.qty}</p>
+            <p class="price">R ${p.price.toFixed(2)}</p>
+            <button onclick="addToCart('${p.name}', ${p.price})"><i class="fa fa-cart-plus"></i> Add</button>
+          </div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    function addToCart(name, price) {
+      total += price;
+      cartTotal.textContent = total.toFixed(2);
+      receipt.push(`${name} - R${price.toFixed(2)}`);
+      alert(`${name} added to cart!`);
+    }
+
+    search.addEventListener("input", e => {
+      const term = e.target.value.toLowerCase();
+      const filtered = products.filter(p => p.name.toLowerCase().includes(term));
+      displayProducts(filtered);
+    });
+
+    shareBtn.addEventListener("click", () => {
+      const message = `🧾 Mamzo Lifestyle Order Receipt:\n\n${receipt.join("\n")}\n\nTotal: R${total.toFixed(2)}\n\nThank you for your order!`;
+      const url = `https://wa.me/27606614909?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    });
+
+    displayProducts(products);
+  </script>
+</body>
+</html>
