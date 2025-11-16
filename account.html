@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mamzo Lifestyle | Account</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://kit.fontawesome.com/a2e8f6bd13.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gradient-to-br from-purple-900 to-black text-white min-h-screen font-poppins">
+
+<!-- Top Navbar -->
+<header class="flex justify-between items-center p-4 bg-black bg-opacity-60">
+  <button id="menuBtn" class="text-purple-400 text-2xl">
+    <i class="fas fa-bars"></i>
+  </button>
+  <h1 class="text-lg font-bold tracking-wide">Account 👤</h1>
+  <div id="timeDisplay" class="text-sm text-purple-300"></div>
+</header>
+
+<!-- Sidebar Drawer -->
+<aside id="drawer"
+  class="fixed top-0 left-0 w-64 h-full bg-black bg-opacity-90 transform -translate-x-full transition-transform duration-300 z-50 p-5 border-r border-purple-700">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-semibold text-purple-400">Welcome User</h2>
+    <button id="closeDrawer" class="text-white text-2xl"><i class="fas fa-times"></i></button>
+  </div>
+  <nav class="space-y-4">
+    <a href="landing.html" class="flex items-center space-x-2 hover:text-purple-400"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="stores.html" class="flex items-center space-x-2 hover:text-purple-400"><i class="fas fa-store"></i><span>Stores</span></a>
+    <a href="payment.html" class="flex items-center space-x-2 hover:text-purple-400"><i class="fas fa-credit-card"></i><span>Payment</span></a>
+    <a href="track.html" class="flex items-center space-x-2 hover:text-purple-400"><i class="fas fa-route"></i><span>Track</span></a>
+    <a href="account.html" class="flex items-center space-x-2 text-purple-400"><i class="fas fa-user"></i><span>Account</span></a>
+    <a href="settings.html" class="flex items-center space-x-2 hover:text-purple-400"><i class="fas fa-cog"></i><span>Settings</span></a>
+    <a href="notifications.html" class="flex items-center space-x-2 hover:text-purple-400"><i class="fas fa-bell"></i><span>Notifications</span></a>
+  </nav>
+</aside>
+
+<!-- Overlay -->
+<div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+<!-- Main Content -->
+<main class="p-6 mt-4 space-y-8">
+
+  <!-- Account Information -->
+  <section class="bg-black bg-opacity-50 p-6 rounded-2xl border border-purple-700 shadow-md">
+    <h2 class="text-xl font-semibold mb-4 text-purple-300"><i class="fas fa-id-card mr-2"></i>Account Details</h2>
+    <div class="space-y-2 text-base">
+      <p><strong>Name:</strong> Mthokozisi Samukelo Mathebula</p>
+      <p><strong>Age:</strong> 21</p>
+      <p><strong>Email:</strong> mthokozisi@example.com</p>
+      <p><strong>Cellphone:</strong> 060 661 4909</p>
+      <p><strong>Customer ID:</strong> 253647</p>
+    </div>
+  </section>
+
+  <!-- Order History -->
+  <section class="bg-black bg-opacity-50 p-6 rounded-2xl border border-purple-700 shadow-md">
+    <h2 class="text-xl font-semibold mb-4 text-purple-300"><i class="fas fa-history mr-2"></i>History</h2>
+    <ul class="space-y-2">
+      <li class="flex items-center justify-between border-b border-purple-800 pb-2">
+        <span><i class="fas fa-burger text-yellow-400 mr-2"></i> Ordered Burger Meal</span>
+        <span class="text-xs text-gray-400">2 Nov 2025</span>
+      </li>
+      <li class="flex items-center justify-between border-b border-purple-800 pb-2">
+        <span><i class="fas fa-pizza-slice text-red-400 mr-2"></i> Ordered Large Pizza</span>
+        <span class="text-xs text-gray-400">29 Oct 2025</span>
+      </li>
+      <li class="flex items-center justify-between border-b border-purple-800 pb-2">
+        <span><i class="fas fa-coffee text-orange-400 mr-2"></i> Breakfast Combo</span>
+        <span class="text-xs text-gray-400">27 Oct 2025</span>
+      </li>
+      <li class="flex items-center justify-between border-b border-purple-800 pb-2">
+        <span><i class="fas fa-ice-cream text-pink-400 mr-2"></i> Dessert Order</span>
+        <span class="text-xs text-gray-400">22 Oct 2025</span>
+      </li>
+      <li class="flex items-center justify-between">
+        <span><i class="fas fa-drumstick-bite text-green-400 mr-2"></i> Lunch Special</span>
+        <span class="text-xs text-gray-400">19 Oct 2025</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Rating and Feedback -->
+  <section class="bg-black bg-opacity-50 p-6 rounded-2xl border border-purple-700 shadow-md">
+    <h2 class="text-xl font-semibold mb-4 text-purple-300"><i class="fas fa-star mr-2"></i>Rate Mamzo Lifestyle</h2>
+    
+    <div class="flex justify-center mb-4 space-x-2 text-2xl" id="starRating">
+      <i class="far fa-star cursor-pointer" data-value="1"></i>
+      <i class="far fa-star cursor-pointer" data-value="2"></i>
+      <i class="far fa-star cursor-pointer" data-value="3"></i>
+      <i class="far fa-star cursor-pointer" data-value="4"></i>
+      <i class="far fa-star cursor-pointer" data-value="5"></i>
+    </div>
+
+    <textarea id="feedbackMsg" rows="4" placeholder="Write your feedback..." class="w-full p-3 rounded-md bg-gray-900 border border-purple-600 focus:ring-2 focus:ring-purple-400"></textarea>
+    
+    <button id="sendFeedback" class="w-full bg-purple-600 py-3 rounded-md font-semibold hover:bg-purple-700 transition">
+      Send Feedback to WhatsApp
+    </button>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="mt-10 text-center py-4 bg-black bg-opacity-60 text-sm border-t border-purple-600">
+  <p class="mb-1">Powered by <span class="font-semibold text-purple-400">BlackLogic Technologies</span> ⚡</p>
+  <p>&copy; <span id="year"></span> Mamzo Lifestyle's. All rights reserved.</p>
+</footer>
+
+<script>
+// Drawer controls
+const menuBtn = document.getElementById('menuBtn');
+const drawer = document.getElementById('drawer');
+const closeDrawer = document.getElementById('closeDrawer');
+const overlay = document.getElementById('overlay');
+
+menuBtn.addEventListener('click', () => {
+  drawer.classList.remove('-translate-x-full');
+  overlay.classList.remove('hidden');
+});
+closeDrawer.addEventListener('click', () => {
+  drawer.classList.add('-translate-x-full');
+  overlay.classList.add('hidden');
+});
+overlay.addEventListener('click', () => {
+  drawer.classList.add('-translate-x-full');
+  overlay.classList.add('hidden');
+});
+
+// Real-time clock
+function updateTime() {
+  const now = new Date();
+  document.getElementById('timeDisplay').textContent = now.toLocaleTimeString();
+}
+setInterval(updateTime, 1000);
+updateTime();
+
+// Year update
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Star Rating Logic
+const stars = document.querySelectorAll('#starRating i');
+let selectedRating = 0;
+
+stars.forEach(star => {
+  star.addEventListener('click', () => {
+    selectedRating = star.dataset.value;
+    stars.forEach(s => s.classList.replace('fas', 'far'));
+    for (let i = 0; i < selectedRating; i++) {
+      stars[i].classList.replace('far', 'fas');
+      stars[i].classList.add('text-yellow-400');
+    }
+  });
+});
+
+// WhatsApp Feedback Sender
+document.getElementById('sendFeedback').addEventListener('click', () => {
+  const msg = document.getElementById('feedbackMsg').value.trim();
+  const ratingText = selectedRating ? `${selectedRating} Stars` : 'No rating';
+  const whatsappURL = `https://wa.me/27606614909?text=Mamzo%20Lifestyle%20Feedback:%0A%0AName:%20Mthokozisi%20Samukelo%20Mathebula%0ACustomer%20ID:%20253647%0ARating:%20${ratingText}%0AFeedback:%20${encodeURIComponent(msg)}`;
+  window.open(whatsappURL, '_blank');
+});
+</script>
+</body>
+</html>
