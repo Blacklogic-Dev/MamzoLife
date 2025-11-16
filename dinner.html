@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mamzo Lifestyle | Dinner</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #0a0a0a; color: white; }
+    .banner { background: url('dinner.jpg') center/cover no-repeat; height: 300px; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Banner -->
+  <div class="banner w-full flex items-center justify-center text-3xl font-bold bg-black bg-opacity-40">
+    Dinner Menu
+  </div>
+
+  <!-- Search -->
+  <div class="p-4">
+    <input id="search" type="text" placeholder="Search for dinner..." 
+      class="w-full p-2 rounded-lg text-black focus:outline-none" onkeyup="filterItems()">
+  </div>
+
+  <!-- Grid -->
+  <div id="menu" class="grid grid-cols-1 sm:grid-cols-2 gap-4 px-4"></div>
+
+  <!-- Cart Section -->
+  <div id="cartSection" class="bg-black bg-opacity-50 p-4 mt-6 rounded-t-2xl border-t border-purple-600">
+    <h2 class="text-xl font-semibold mb-2 flex items-center gap-2">
+      <i class="fa fa-shopping-cart text-purple-400"></i> Cart
+    </h2>
+    <div id="cartItems" class="text-sm space-y-2"></div>
+    <div class="mt-4 font-semibold text-lg">Total: R<span id="totalPrice">0.00</span></div>
+    <button onclick="shareReceipt()" 
+      class="mt-3 w-full bg-purple-600 hover:bg-purple-700 rounded-lg py-2 flex items-center justify-center gap-2">
+      <i class="fa-brands fa-whatsapp"></i> Share Receipt via WhatsApp
+    </button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-auto text-center py-4 bg-black bg-opacity-60 text-sm border-t border-purple-600">
+    <p class="mb-1">Powered by <span class="font-semibold text-purple-400">BlackLogic Technologies</span> ⚡</p>
+    <p>&copy; <span id="year"></span> Mamzo Lifestyle's. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Dinner Menu Data
+    const items = [
+      {img:'dinner1.jpg', name:'Ntambama Meal', qty:'Pap, wors and beef stew', price:89.99, save:10},
+      {img:'dinner2.jpg', name:'English Dinner', qty:'Rice, fried chicken and coleslaw', price:99.99, save:30},
+      {img:'dinner3.jpg', name:'Italic Monate', qty:'Cheese and macaroni', price:79.99, save:20},
+      {img:'dinner4.jpg', name:'Summer Mnandi', qty:'HotDog with wors, juice and chips', price:64.99, save:12},
+      {img:'dinner5.jpg', name:'Sweet Zonke', qty:'Swissy rolls and juice', price:65.99, save:18},
+      {img:'dinner6.jpg', name:'Red Velvet', qty:'1/4 piece of cake', price:36.99, save:24},
+    ];
+
+    const menu = document.getElementById('menu');
+    const cartItems = document.getElementById('cartItems');
+    const totalPriceEl = document.getElementById('totalPrice');
+    let cart = [];
+    let totalPrice = 0;
+
+    // Render Menu
+    items.forEach((item, i) => {
+      const card = document.createElement('div');
+      card.className = 'bg-white/10 rounded-2xl p-3 shadow-lg';
+      card.innerHTML = `
+        <img src="${item.img}" alt="${item.name}" class="rounded-xl h-40 w-full object-cover mb-2">
+        <h3 class="text-lg font-semibold">${item.name}</h3>
+        <p class="text-sm text-gray-300">Quantity: ${item.qty}</p>
+        <p class="text-sm mt-1">Price: <span class="text-purple-400 font-semibold">R${item.price.toFixed(2)}</span></p>
+        <p class="text-xs text-green-400">Save R${item.save}</p>
+        <button onclick="addToCart(${i})" class="mt-2 bg-purple-600 hover:bg-purple-700 w-full rounded-lg py-1">Add to Cart</button>
+      `;
+      menu.appendChild(card);
+    });
+
+    // Add to Cart
+    function addToCart(i){
+      const item = items[i];
+      cart.push(item);
+      totalPrice += item.price;
+      updateCart();
+    }
+
+    // Update Cart
+    function updateCart(){
+      cartItems.innerHTML = '';
+      cart.forEach(item=>{
+        cartItems.innerHTML += `
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <img src="${item.img}" class="w-8 h-8 rounded">
+              <span>${item.name}</span>
+            </div>
+            <span>R${item.price.toFixed(2)}</span>
+          </div>`;
+      });
+      totalPriceEl.textContent = totalPrice.toFixed(2);
+    }
+
+    // WhatsApp Share
+    function shareReceipt(){
+      let message = `🍽️ Mamzo Lifestyle Dinner Receipt:\n\n`;
+      cart.forEach(item => {
+        message += `${item.name} - R${item.price.toFixed(2)}\n`;
+      });
+      message += `\n💰 Total: R${totalPrice.toFixed(2)}\n\nThank you for choosing Mamzo Lifestyle's!`;
+      const encoded = encodeURIComponent(message);
+      window.open(`https://wa.me/27606614909?text=${encoded}`, '_blank');
+    }
+
+    // Filter Search
+    function filterItems(){
+      const q = document.getElementById('search').value.toLowerCase();
+      menu.querySelectorAll('div').forEach((card, i)=>{
+        card.style.display = items[i].name.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+    }
+
+    // Footer Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
